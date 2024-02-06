@@ -38,13 +38,13 @@ const RatesComponent = () => {
   }, [API_URL]);
 
   return (
-    <div className="mt-10">
+    <>
       {isLoading ? (
         <div className="flex items-center justify-center">
           <Loading />
         </div>
       ) : (
-        <div className="flex flex-col">
+        <div>
           <RatesHeader />
           <RateContainer>
             {rateStore.map((rate) => (
@@ -62,7 +62,7 @@ const RatesComponent = () => {
           </RateContainer>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
