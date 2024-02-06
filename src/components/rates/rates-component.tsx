@@ -6,10 +6,13 @@ import axios from "axios";
 import Loading from "@/components/ui/loading";
 import RateCard from "./rate-card";
 import RateContainer from "./rate-container";
+import { getRateFilter } from "@/action/get-rate-filters";
 
 const RatesComponent = () => {
   const rateStore = useRatesStore((state) => state.rates);
+  const rateFilters = useRatesParamsStore((state) => state.rateFilters);
   const setRatesStore = useRatesStore((state) => state.setRates);
+  const setRateFilters = useRatesParamsStore((state) => state.setRateFilters);
   const containerSize = useRatesParamsStore((state) => state.containerSize);
   const containerType = useRatesParamsStore((state) => state.containerType);
 
@@ -23,10 +26,17 @@ const RatesComponent = () => {
         setIsLoading(true);
         const response = await axios.get(API_URL);
         const rates = await response.data;
+        const fetchedRates = await rates.data.rates;
 
-        setRatesStore(rates.data.rates);
-        console.log(rates);
-        console.log(rateStore);
+        setRatesStore(fetchedRates);
+        const rateFilters: string[] = [];
+
+        const filters = getRateFilter(fetchedRates);
+
+        filters.forEach((filter) => {
+          rateFilters.push(filter as string);
+          setRateFilters(rateFilters);
+        });
       } catch (error) {
         console.log(error);
       } finally {
@@ -45,10 +55,11 @@ const RatesComponent = () => {
         </div>
       ) : (
         <div>
-          <RatesHeader />
+          <RatesHeader rateFilters={rateFilters} />
           <RateContainer>
-            {rateStore.map((rate) => (
+            {rateStore.map((rate, i) => (
               <RateCard
+                key={i}
                 amountUsd={rate.total_amount_usd}
                 carrier_name={rate.carrier_name}
                 demurrage_days={rate.demurrage_days}
