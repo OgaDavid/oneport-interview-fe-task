@@ -73,6 +73,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: inter;
+    overflow-x: hidden;
   }
 }
 
@@ -88,4 +89,10 @@
 
 .container {
   @apply px-6 max-w-[1200px] mx-auto;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background-color: transparent;
 }
