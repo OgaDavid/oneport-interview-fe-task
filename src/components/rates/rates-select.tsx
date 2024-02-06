@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useRatesStore } from "@/hooks/use-rates-store";
+import { useRatesParamsStore } from "@/store/use-rates-params-store";
 
 enum RateContainerSelect {
   TYPE = "type",
@@ -18,12 +18,15 @@ interface RateSelectProps {
 }
 
 export function RateSelect({ type }: RateSelectProps) {
-  const containerSize = useRatesStore((state) => state.containerSize);
-  const containerType = useRatesStore((state) => state.containerType);
-  const setContainerSize = useRatesStore((state) => state.setContainerSize);
-  const setContainerType = useRatesStore((state) => state.setContainerType);
+  const containerSize = useRatesParamsStore((state) => state.containerSize);
+  const containerType = useRatesParamsStore((state) => state.containerType);
+  const setContainerSize = useRatesParamsStore(
+    (state) => state.setContainerSize
+  );
+  const setContainerType = useRatesParamsStore(
+    (state) => state.setContainerType
+  );
 
-  console.log(containerSize, containerType);
   return (
     <>
       {type === RateContainerSelect.SIZE ? (
@@ -62,7 +65,7 @@ export function RateSelect({ type }: RateSelectProps) {
               {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 ["DRY", "REEFER"].map((type, i) => (
-                  <SelectItem key={i} value={type}>
+                  <SelectItem key={i} value={type.toLocaleLowerCase()}>
                     {type}
                   </SelectItem>
                 ))
