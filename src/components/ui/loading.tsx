@@ -1,6 +1,6 @@
 const Loading = () => {
   return (
-    <div className="border-custom-blue flex items-center justify-center h-10 w-10 animate-spin rounded-full border-[5px] border-t-custom-green" />
+    <div className="border-custom-grey flex items-center justify-center h-8 w-8 animate-spin rounded-full border-[3px] border-t-custom-green" />
   );
 };
 
