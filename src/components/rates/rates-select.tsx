@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useRatesParamsStore } from "@/store/use-rates-params-store";
+import { useRatesParamsStore } from "@/store/rates-params-store";
 
 enum RateContainerSelect {
   TYPE = "type",

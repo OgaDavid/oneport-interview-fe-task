@@ -6,6 +6,7 @@ export interface Rate {
   carrier_scac: string;
   offer_type: string;
   route_schedule: [];
+  transit_time?: string;
   service_type: string;
   sailing_date: string;
   demurrage_days: number;
