@@ -12,7 +12,6 @@ export function getRateFilter(rates: Rate[]) {
 
   // Convert the Set back to an array
   const uniqueCarrierNamesArray = [...uniqueCarrierNames];
-  // console.log(uniqueCarrierNamesArray);
 
   return uniqueCarrierNamesArray;
 }
