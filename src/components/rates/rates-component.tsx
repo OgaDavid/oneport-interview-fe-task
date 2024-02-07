@@ -7,13 +7,20 @@ import Loading from "@/components/ui/loading";
 import RateCard from "./rate-card";
 import RateContainer from "./rate-container";
 import { getRateFilter } from "@/action/get-rate-filters";
+import { useRatesFilterStore } from "@/store/rates-filters-store";
 
 const RatesComponent = () => {
   const [noOfRates, setNoOfRates] = useState(9);
   const rateStore = useRatesStore((state) => state.rates);
-  const rateFilters = useRatesParamsStore((state) => state.rateFilters);
+  const CurrentRateFilter = useRatesFilterStore(
+    (state) => state.currentRateFilter
+  );
+  const setCurrentRateFilter = useRatesFilterStore(
+    (state) => state.setCurrentRateFilter
+  );
+  const rateFilters = useRatesFilterStore((state) => state.rateFilters);
   const setRatesStore = useRatesStore((state) => state.setRates);
-  const setRateFilters = useRatesParamsStore((state) => state.setRateFilters);
+  const setRateFilters = useRatesFilterStore((state) => state.setRateFilters);
   const containerSize = useRatesParamsStore((state) => state.containerSize);
   const containerType = useRatesParamsStore((state) => state.containerType);
 
@@ -33,6 +40,8 @@ const RatesComponent = () => {
         const rateFilters: string[] = [];
 
         const filters = getRateFilter(fetchedRates);
+        setCurrentRateFilter(filters[0] as string);
+        console.log(CurrentRateFilter);
 
         filters.forEach((filter) => {
           rateFilters.push(filter as string);
@@ -48,7 +57,11 @@ const RatesComponent = () => {
     fetchRates();
   }, [API_URL]);
 
-  const paginatedRates = rateStore.slice(0, noOfRates);
+  const filteredRates = rateStore.filter((rate) => {
+    return rate.carrier_name === CurrentRateFilter;
+  });
+
+  const paginatedRates = filteredRates.slice(0, noOfRates);
 
   return (
     <>
@@ -74,31 +87,33 @@ const RatesComponent = () => {
               />
             ))}
           </RateContainer>
-          <div className="mt-10">
-            <p className="text-center mb-4 text-sm text-custom-black">
-              Viewing {paginatedRates.length} of {rateStore.length} special
-              rates
-            </p>
-            {paginatedRates.length <= 9 ? (
-              <button
-                className="border-solid flex px-12 mx-auto border-[1px] border-[#374151] rounded py-3"
-                onClick={() => {
-                  setNoOfRates(rateStore.length);
-                }}
-              >
-                Show All
-              </button>
-            ) : (
-              <button
-                className="border-solid flex px-12 mx-auto border-[1px] border-[#374151] rounded py-3"
-                onClick={() => {
-                  setNoOfRates(9);
-                }}
-              >
-                Show Less
-              </button>
-            )}
-          </div>
+          {paginatedRates.length >= 9 && (
+            <div className="mt-10">
+              <p className="text-center mb-4 text-sm text-custom-black">
+                Viewing {paginatedRates.length} of {filteredRates.length}{" "}
+                special rates
+              </p>
+              {paginatedRates.length <= 9 ? (
+                <button
+                  className="border-solid flex px-12 mx-auto border-[1px] border-[#374151] rounded py-3"
+                  onClick={() => {
+                    setNoOfRates(rateStore.length);
+                  }}
+                >
+                  Show All
+                </button>
+              ) : (
+                <button
+                  className="border-solid flex px-12 mx-auto border-[1px] border-[#374151] rounded py-3"
+                  onClick={() => {
+                    setNoOfRates(9);
+                  }}
+                >
+                  Show Less
+                </button>
+              )}
+            </div>
+          )}
         </div>
       )}
     </>
