@@ -38,7 +38,7 @@ const RatesComponent = () => {
   const setRateFilters = useRatesFilterStore((state) => state.setRateFilters);
 
   // API URL
-  const API_URL = `${import.meta.env.VITE_BASE_URL}/container_size=${containerSize}&container_type=${containerType}`;
+  const API_URL = `${import.meta.env.VITE_BASE_URL}container_size=${containerSize}&container_type=${containerType}`;
 
   useEffect(() => {
     /**
