@@ -33,7 +33,7 @@ const RateCard = ({
       </div>
       <div className="mt-3 mb-6 flex items-center justify-between">
         <p className="text-xl font-normal text-custom-deep-green">
-          ${amountUsd}
+          {!amountUsd ? "N/A" : "$" + amountUsd}
         </p>
         <p className="flex justify-end mb-2"></p>
       </div>
