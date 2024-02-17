@@ -6,7 +6,7 @@
 # SOLUTION
 
 ### Tech Stack ⚒
-- React
+- React JS
 - Typescript
 - Tailwind
 - Zustand
