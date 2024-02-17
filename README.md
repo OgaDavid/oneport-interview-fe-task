@@ -5,7 +5,7 @@
 
 # SOLUTION
 
-### Tech Stack
+### Tech Stack ⚒
 - React
 - Typescript
 - Tailwind
