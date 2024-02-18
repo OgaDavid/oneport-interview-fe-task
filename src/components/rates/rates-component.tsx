@@ -5,7 +5,7 @@ import Loading from "@/components/ui/loading";
 import RatesHeader from "@/components/rates/rates-header";
 import RateContainer from "./rate-container";
 
-import { getRateFilter } from "@/action/get-rate-filters";
+import { getRateFilters } from "@/lib/utils";
 import { useRatesParamsStore } from "@/store/rates-params-store";
 import { useRatesStore } from "@/store/rates-store";
 import { useRatesFilterStore } from "@/store/rates-filters-store";
@@ -56,7 +56,7 @@ const RatesComponent = () => {
 
         const rateFilters: string[] = [];
 
-        const filters = getRateFilter(fetchedRates);
+        const filters = getRateFilters(fetchedRates);
         setCurrentRateFilter(filters[0] as string);
         filters.forEach((filter) => {
           rateFilters.push(filter as string);
