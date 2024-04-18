@@ -17,12 +17,3 @@
 
 
 https://github.com/OgaDavid/oneport-interview-fe-task/assets/104001201/3f6a592b-bb48-461d-89fc-952f33e969ff
-
-
-<br />
-
-### _NOTE:_ I used this [Test API](https://test-api.oneport365.com/api/live_rates/get_special_rates_no_auth?/container_size=20FT&container_type=dry) as the API instead since the [API](https://oneport365.free.beeceptor.com/live_rates?container_size=20FT&container_type=dry) given in the task kept returning no data.
-
-<br />
-
-![api error](https://github.com/OgaDavid/oneport-interview-fe-task/assets/104001201/b74df9cb-d6be-449a-be6a-5bc336f20139)
